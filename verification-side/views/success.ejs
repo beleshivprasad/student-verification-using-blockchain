@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/solar/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/solar/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="./../public/css/style.css">
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <div class="container text-center">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/verification">Start Verification</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <h2 style="text-align: center;">Student Verification System</h2>
+        <h3 class="p-4">Welcome <%= user.username %></h3>
+        <% if(fail != ''){ %>
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong><%=fail %></strong>
+            </div> 
+            <% } %>
+            <% if(success != '') {%>
+            <div class="alert alert-dismissible alert-success" wfd-id="199">
+                <button type="button" class="close" data-dismiss="alert" wfd-id="571">&times;</button>
+                <strong><%=success%></strong>
+            </div>
+            <%}%>
+        <%if(showData){%>
+
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="close" data-dismiss="alert"></button>
+                <strong style="font-size: 20px;"><%=fname%></strong>
+                <strong style="font-size: 20px;"><%=lname%></strong><br>
+                <strong style="font-size: 20px;"><%=prn%></strong><br><br>
+            </div>
+
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Course Code</th>
+                    <th scope="col">Credits</th>
+                    <th scope="col">Grades</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="col"><%=cData[0].course%></td>
+                        <td scope="col"><%=cData[0].credit%></td>
+                        <td scope="col"><%=cData[0].grade%></td>
+                      </tr>
+                      <tr>
+                        <td scope="col"><%=cData[1].course%></td>
+                        <td scope="col"><%=cData[1].credit%></td>
+                        <td scope="col"><%=cData[1].grade%></td>
+                      </tr>
+                      <tr>
+                        <td scope="col"><%=cData[2].course%></td>
+                        <td scope="col"><%=cData[2].credit%></td>
+                        <td scope="col"><%=cData[2].grade%></td>
+                      </tr>
+                      <tr>
+                        <td scope="col"><%=cData[3].course%></td>
+                        <td scope="col"><%=cData[3].credit%></td>
+                        <td scope="col"><%=cData[3].grade%></td>
+                      </tr>
+                      <tr>
+                        <td scope="col"><%=cData[4].course%></td>
+                        <td scope="col"><%=cData[4].credit%></td>
+                        <td scope="col"><%=cData[4].grade%></td>
+                      </tr>
+                      <tr>
+                        <td scope="col"><%=cData[5].course%></td>
+                        <td scope="col"><%=cData[5].credit%></td>
+                        <td scope="col"><%=cData[5].grade%></td>
+                      </tr>
+                      <tr class="table-primary">
+                        <td></td>
+                        <td>CPI</td>
+                        <td><%=cpi%></td>
+                      </tr>
+                </tbody>
+              </table>
+        <%}%>
+       
+        <% if(bool){ %>
+            <form class="myborder" method="POST" action="/verify">
+                <fieldset>
+                    <legend>Verification</legend>
+                    <% if(error!='' ) { %>
+                        <div class="alert alert-dismissible alert-danger">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong><%=error%></strong>
+                          </div>
+                        <% } %>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="prn" name="prn" placeholder="PRN/Roll No">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="select" name="cpi" placeholder="CPI"
+                                    step="0.1" min="3" max="10">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleSelect1">Branch</label>
+                                <select class="form-control" id="exampleSelect1" name="branch">
+                                    <option name=""></option>
+                                    <option name="cs">Computer Science and Engineering</option>
+                                    <option name="it">Information Technology</option>
+                                    <option name="cv">Civil Engineering</option>
+                                    <option name="el">Electrical Engineering</option>
+                                    <option name="en">Electronics Engineering</option>
+                                </select>
+                            </div>
+                            <input type="submit" class="btn btn-primary" value="Verify">
+                </fieldset>
+            </form>
+            <% } %>
+
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</html>
